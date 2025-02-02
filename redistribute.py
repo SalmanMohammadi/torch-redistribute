@@ -130,15 +130,6 @@ def print_model(model):
     print_tensor_distribution(model.w1.weight, "model.w1", rank)
     print_tensor_distribution(model.w2.weight, "model.w2", rank)
     print_tensor_distribution(model.w3.weight, "model.w3", rank)
-    # print(
-    #     f"\nRank {dist.get_rank()}:\t model.w1 local shape: {model.w1.weight.to_local().shape}"
-    # )
-    # print(
-    #     f"\nRank {dist.get_rank()}:\t model.w2 local shape: {model.w2.weight.to_local().shape}"
-    # )
-    # print(
-    #     f"\nRank {dist.get_rank()}:\t model.w3 local shape: {model.w3.weight.to_local().shape}"
-    # )
 
 
 def distribute_replicate(model: nn.Module, device_mesh):
@@ -151,28 +142,19 @@ def main():
     device_mesh = init_device_mesh("cpu", (world_size,))
 
     model = FeedForward(dim=6, hidden_dim=8)
-
-    # printr0("Using FSDP")
-    # distribute_module(model, device_mesh)
     distribute_replicate(model, device_mesh)
-    # dummy_input = torch.randn(6, 4)
     print_model(model)
     model(torch.randn(4, 6))
-    print("=" * 80)
-    printr0("Redistributing")
+
+    torch.cpu.synchronize()
+    if dist.get_rank() == 0:
+        printr0("=" * 80)
+        printr0("Redistributing")
     with torch.no_grad():
         redistribute_ff(model, device_mesh)
         print_model(model)
         model(torch.randn(4, 6))
-    # expected after redistribution
-    # Rank 0:  model.w1 local shape: torch.Size([4, 6])
-    # Rank 1:  model.w1 local shape: torch.Size([4, 6])
 
-    # Rank 0:  model.w2 local shape: torch.Size([8, 3])
-    # Rank 1:  model.w2 local shape: torch.Size([8, 3])
-
-    # Rank 0:  model.w3 local shape: torch.Size([4, 6])
-    # Rank 1:  model.w3 local shape: torch.Size([4, 6])
 
     dist.destroy_process_group()
 
