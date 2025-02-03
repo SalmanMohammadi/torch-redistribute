@@ -19,75 +19,8 @@ from torch_redistribute.style import (
 )
 from torch.distributed.tensor.debug import CommDebugMode, visualize_sharding
 
-# credit to @msaroufim for this function
-def print_tensor_distribution(param, name: str, rank: int):
-    """Custom function to print tensor distribution information"""
-    if rank == 0:
-        print(f"\n{name}:")
-        print("-" * 50)
-        print(f"Global shape: {param.shape}")
-        print(f"Local shape: {param.to_local().shape}")
-        print(f"Placement: {param.placements}")
-        
-        # For 2D tensors, use visualize_sharding
-        if len(param.shape) == 2:
-            print("\nSharding Visualization:")
-            visualize_sharding(param, name)
-        # For 1D tensors, print custom visualization
-        else:
-            local_size = param.to_local().size(0)
-            total_size = param.size(0)
-            if "[Replicate()]" in str(param.placements):
-                print("\nReplicated across all ranks")
-                print(f"Each rank has full tensor of size {total_size}")
-            else:
-                start_idx = rank * local_size
-                end_idx = start_idx + local_size
-                print(f"\nSharded along dimension 0")
-                print(f"Rank {rank} handles indices {start_idx} to {end_idx-1}")
-
-def get_fsdp_modules(model):
-    return [module for module in model.modules() if hasattr(module, "_get_fsdp_state")]
-
-class FeedForward(nn.Module):
-    """This class implements the feed-forward network derived from Llama2.
-
-    Args:
-        gate_proj (nn.Module): Projection from input dim to hidden dim, fed through activation
-            and multiplied by up_proj.
-        down_proj (nn.Module): Final projection to output dim.
-        up_proj (Optional[nn.Module]): Projection from input dim to hidden dim, multiplied by
-            activation(gate_proj).
-        activation (nn.Module): Activation function to use. Default is nn.SiLU().
-    """
-
-    def __init__(
-        self,
-        *,
-        dim,
-        hidden_dim,
-        activation: nn.Module = nn.SiLU(),
-    ):
-        super().__init__()
-        self.w1 = nn.Linear(dim, hidden_dim, bias=False)
-        self.w3 = nn.Linear(dim, hidden_dim, bias=False)
-        self.w2 = nn.Linear(hidden_dim, hidden_dim, bias=False)
-        self.activation = activation
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Args:
-            x (torch.Tensor): input tensor with shape ``(..., in_dim)``, where ``in_dim`` is the
-            input dimension of both ``gate_proj`` and ``up_proj``.
-
-        Returns:
-            torch.Tensor: output tensor with shape ``(..., out_dim)``, where ``out_dim`` is the \
-            output dimension of ``down_proj``.
-        """
-        h = self.activation(self.w1(x))
-        h = h * self.w3(x)
-        h = self.w2(h)
-        return h
+from torch_redistribute.utils import print_tensor_distribution
+from torch_redistribute.redistribute import FeedForward
 
 
 redistribute_parallelize_plan = {
