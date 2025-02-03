@@ -6,37 +6,34 @@ import torch.distributed as dist
 import torch.distributed.tensor
 import torch.nn as nn
 from torch.distributed._composable.fsdp import fully_shard
-from torch.distributed.tensor import init_device_mesh, Replicate, Shard, distribute_tensor, distribute_module
+from torch.distributed._composable.fsdp.fully_shard import _get_module_fsdp_state
+from torch.distributed.tensor import (
+    distribute_module,
+    distribute_tensor,
+    init_device_mesh,
+    Replicate,
+    Shard,
+)
+from torch.distributed.tensor.debug import CommDebugMode, visualize_sharding
 from torch.distributed.tensor.parallel import (
     ColwiseParallel,
     parallelize_module,
     RowwiseParallel,
 )
-from torch_redistribute.style import (
-    RedistributeColWiseParallel,
-    RedistributeRowWiseParallel,
-    ReplicateParallel
-)
-from torch.distributed.tensor.debug import CommDebugMode, visualize_sharding
+from torch_redistribute.utils import FeedForward
+from torch_redistribute.style import ReplicateParallel
 
 from torch_redistribute.utils import print_tensor_distribution
-from torch_redistribute.redistribute import FeedForward
 
 
-redistribute_parallelize_plan = {
-    "w1": RedistributeColWiseParallel(),
-    "w2": RedistributeRowWiseParallel(),
-    "w3": RedistributeColWiseParallel(),
-}
-
-
-def redistribute(layer: nn.Module, device_mesh):
-    parallelize_module(layer, device_mesh, redistribute_parallelize_plan)
+def get_fsdp_modules(model):
+    return [module for module in model.modules() if hasattr(module, "_get_fsdp_state")]
 
 
 def printr0(str):
     if dist.get_rank() == 0:
         print(str)
+
 
 def print_model(model):
     rank = dist.get_rank()
@@ -48,6 +45,7 @@ def print_model(model):
 def distribute_replicate(model: nn.Module, device_mesh):
     parallelize_module(model, device_mesh, ReplicateParallel())
 
+
 def main():
     dist.init_process_group(backend="gloo")
 
@@ -58,6 +56,7 @@ def main():
     fully_shard(model, mesh=device_mesh)
     if dist.get_rank() == 0:
         import pdb
+
         pdb.set_trace()
     # distribute_replicate(model, device_mesh)
     # print_model(model)

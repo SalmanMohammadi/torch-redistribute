@@ -1,4 +1,12 @@
+import torch.nn as nn
 from torch.distributed.tensor.debug import CommDebugMode, visualize_sharding
+from torch.distributed.tensor.parallel import parallelize_module
+
+from torch_redistribute.style import (
+    RedistributeColWiseParallel,
+    RedistributeRowWiseParallel,
+)
+
 
 def print_tensor_distribution(param, name: str, rank: int):
     """Custom function to print tensor distribution information"""
@@ -8,7 +16,7 @@ def print_tensor_distribution(param, name: str, rank: int):
         print(f"Global shape: {param.shape}")
         print(f"Local shape: {param.to_local().shape}")
         print(f"Placement: {param.placements}")
-        
+
         # For 2D tensors, use visualize_sharding
         if len(param.shape) == 2:
             print("\nSharding Visualization:")
@@ -25,3 +33,14 @@ def print_tensor_distribution(param, name: str, rank: int):
                 end_idx = start_idx + local_size
                 print(f"\nSharded along dimension 0")
                 print(f"Rank {rank} handles indices {start_idx} to {end_idx-1}")
+
+
+redistribute_parallelize_plan = {
+    "w1": RedistributeColWiseParallel(),
+    "w2": RedistributeRowWiseParallel(),
+    "w3": RedistributeColWiseParallel(),
+}
+
+
+def redistribute(layer: nn.Module, device_mesh):
+    parallelize_module(layer, device_mesh, redistribute_parallelize_plan)

@@ -1,11 +1,18 @@
 # torchrun --nnodes=1 --nproc-per-node=2 test.py
-
-from torch.distributed.fsdp import FullyShardedDataParallel as FSDP
+import functools
 from contextlib import contextmanager
-from torch.distributed.fsdp import fully_shard
+
+import torch
+
 import torch.distributed as dist
-from torch_redistribute.redistribute import FeedForward
+from torch.distributed._composable.fsdp import fully_shard
+from torch.distributed._composable.fsdp.fully_shard import _get_module_fsdp_state
+from torch.distributed.fsdp import FullyShardedDataParallel as FSDP
 from torch.distributed.tensor import init_device_mesh
+from torch_redistribute.utils import redistribute
+from torch_redistribute.model import FeedForward
+
+
 def _unwrap_fsdp_module(module):
     """Recursively unwraps FSDP-wrapped modules in-place."""
     for name, child in module.named_children():
@@ -19,24 +26,70 @@ def _unwrap_fsdp_module(module):
             _unwrap_fsdp_module(child)
     return module
 
-# @contextmanager
-def fsdp_to_tp_context(model):
-    """Context manager to transition model from FSDP to TP+FSDP."""
-    # Step 1: Unwrap FSDP layers
-    original_model = model
-    unwrapped_model = _unwrap_fsdp_module(model)
+
+def get_fsdp_modules(model):
+    return [
+        module
+        for module in model.modules()
+        if _get_module_fsdp_state(module) is not None
+    ]
+
+
+def unwrap_fsdp(model, device_mesh):
+    fsdp_modules = get_fsdp_modules(model)
+    state_hooks = []
+    original_attrs = {}
+    for module in fsdp_modules:
+        state = _get_module_fsdp_state(module)
+        if not state:
+            continue
+
+        # Save original hooks and replace with dummies
+        state_hooks.append((state, state._pre_forward, state._post_forward))
+
+        # Replacement functions that bypass FSDP logic
+        state._pre_forward = lambda _, m, args, kwargs: (args, kwargs)
+        state._post_forward = lambda _, m, args, output: output
+
+        # 2. Override __call__ to bypass nn.Module hooks
+        original_attrs[module] = {
+            "_call_impl": module._call_impl,
+            "_fsdp_use_tp": False,  # Flag for tracking
+        }
+
+        def _patched_call(module, *args, **kwargs):
+            if original_attrs[module]["_fsdp_use_tp"]:
+                return module.forward(*args, **kwargs)
+            return original_attrs[module]["_call_impl"](*args, **kwargs)
+
+        module._call_impl = functools.partial(_patched_call, module)
+        original_attrs[module]["_fsdp_use_tp"] = True
+    dummy_input = torch.randn(4, 6)
+    redistribute(model, device_mesh)
+    model(dummy_input)
+    if dist.get_rank() == 0:
+        import pdb
+
+        pdb.set_trace()
+
+    for module in fsdp_modules:
+        if module in original_attrs:
+            module._call_impl = original_attrs[module]['_call_impl']
+            
+    for state, pre_hook, post_hook in state_hooks:
+        state._pre_forward = pre_hook
+        state._post_forward = post_hook
+
+    # 5. Reset FSDP states
+    for module in fsdp_modules:
+        if hasattr(module, "reshard"):
+            module.reshard()
+    print(f"weighta fter reshard", model.w2.weight)
     
-    # Step 2: Apply Tensor Parallel transformations
-    # reparallelize_model_for_tp(unwrapped_model)  # User-defined function
-    
-    # Step 3: Re-apply FSDP sharding
-    fully_shard(unwrapped_model)  # Assuming this is your FSDP initialization
-    
-    try:
-        yield unwrapped_model
-    finally:
-        # Note: Reverting is non-trivial; this context makes permanent changes
-        pass
+    if dist.get_rank() == 0:
+        import pdb
+
+        pdb.set_trace()
 
 def main():
     dist.init_process_group(backend="gloo")
@@ -45,10 +98,12 @@ def main():
     device_mesh = init_device_mesh("cpu", (world_size,))
 
     model = FeedForward(dim=6, hidden_dim=8)
+    print(f"weighta before fsdp", model.w2.weight)
     fully_shard(model, mesh=device_mesh)
-    if dist.get_rank() == 0:
-        import pdb
-        pdb.set_trace()
-    
+    print(f"weighta after fsdp", model.w2.weight)
+    unwrap_fsdp(model, device_mesh)
+    dist.destroy_process_group()
+
+
 if __name__ == "__main__":
     main()
