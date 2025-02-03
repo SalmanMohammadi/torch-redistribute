@@ -19,6 +19,7 @@ from torch_redistribute.style import (
 )
 from torch.distributed.tensor.debug import CommDebugMode, visualize_sharding
 
+# credit to @msaroufim for this function
 def print_tensor_distribution(param, name: str, rank: int):
     """Custom function to print tensor distribution information"""
     if rank == 0:
@@ -45,6 +46,8 @@ def print_tensor_distribution(param, name: str, rank: int):
                 print(f"\nSharded along dimension 0")
                 print(f"Rank {rank} handles indices {start_idx} to {end_idx-1}")
 
+def get_fsdp_modules(model):
+    return [module for module in model.modules() if hasattr(module, "_get_fsdp_state")]
 
 class FeedForward(nn.Module):
     """This class implements the feed-forward network derived from Llama2.
@@ -93,37 +96,14 @@ redistribute_parallelize_plan = {
     "w3": RedistributeColWiseParallel(),
 }
 
-parallelize_plan = {
-    "w1": ColwiseParallel(),
-    "w2": RowwiseParallel(),
-    "w3": ColwiseParallel(),
-}
 
-
-def distribute_ff(layer: nn.Module, device_mesh):
-    parallelize_module(layer, device_mesh, parallelize_plan)
-
-
-def redistribute_ff(layer: nn.Module, device_mesh):
+def redistribute(layer: nn.Module, device_mesh):
     parallelize_module(layer, device_mesh, redistribute_parallelize_plan)
-
-
-def redistribute_ff_dtensor(layer: nn.Module, device_mesh):
-    layer.w1.weight = nn.Parameter(
-        layer.w1.weight.redistribute(device_mesh=device_mesh, placements=[Shard(0)])
-    )
-    layer.w2.weight = nn.Parameter(
-        layer.w2.weight.redistribute(device_mesh=device_mesh, placements=[Shard(1)])
-    )
-    layer.w3.weight = nn.Parameter(
-        layer.w3.weight.redistribute(device_mesh=device_mesh, placements=[Shard(0)])
-    )
 
 
 def printr0(str):
     if dist.get_rank() == 0:
         print(str)
-
 
 def print_model(model):
     rank = dist.get_rank()
@@ -142,19 +122,22 @@ def main():
     device_mesh = init_device_mesh("cpu", (world_size,))
 
     model = FeedForward(dim=6, hidden_dim=8)
-    distribute_replicate(model, device_mesh)
-    print_model(model)
-    model(torch.randn(4, 6))
-
-    torch.cpu.synchronize()
+    fully_shard(model, mesh=device_mesh)
     if dist.get_rank() == 0:
-        printr0("=" * 80)
-        printr0("Redistributing")
-    with torch.no_grad():
-        redistribute_ff(model, device_mesh)
-        print_model(model)
-        model(torch.randn(4, 6))
+        import pdb
+        pdb.set_trace()
+    # distribute_replicate(model, device_mesh)
+    # print_model(model)
+    # model(torch.randn(4, 6))
 
+    # torch.cpu.synchronize()
+    # if dist.get_rank() == 0:
+    #     printr0("=" * 80)
+    #     printr0("Redistributing")
+    # with torch.no_grad():
+    #     redistribute(model, device_mesh)
+    #     print_model(model)
+    #     model(torch.randn(4, 6))
 
     dist.destroy_process_group()
 

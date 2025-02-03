@@ -21,9 +21,6 @@ class ReplicateParallel(ParallelStyle):
             input_tensor = DTensor.from_local(inputs[0], device_mesh)
         return input_tensor
 
-    @staticmethod
-    def _prepare_output_fn(mod, outputs, device_mesh):
-        return outputs
 
     def _apply(self, module, device_mesh):
         return distribute_module(
@@ -31,7 +28,6 @@ class ReplicateParallel(ParallelStyle):
             device_mesh,
             partition_fn=None,
             input_fn=self._prepare_input_fn,
-            output_fn=self._prepare_output_fn,
         )
 
 
