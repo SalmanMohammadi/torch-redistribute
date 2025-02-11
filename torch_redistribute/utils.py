@@ -8,6 +8,7 @@ from torch_redistribute.style import (
 )
 
 
+# credit to @msaroufim for this funcition
 def print_tensor_distribution(param, name: str, rank: int):
     """Custom function to print tensor distribution information"""
     if rank == 0:
@@ -44,3 +45,10 @@ redistribute_parallelize_plan = {
 
 def redistribute(layer: nn.Module, device_mesh):
     parallelize_module(layer, device_mesh, redistribute_parallelize_plan)
+
+
+def printr(*args):
+    import torch.distributed as dist
+
+    if dist.get_rank() == 0:
+        print(*args)

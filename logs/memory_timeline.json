@@ -1,0 +1,3268 @@
+{
+  "traceEvents": [
+    {
+      "name": "create_model1",
+      "ph": "X",
+      "ts": 1124.946,
+      "dur": 14724.672,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 368,
+        "cpu_memory_usage_mb": 0.0003509521484375
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 1307.612,
+      "dur": 5.54099999999994,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 1385.444,
+      "dur": 1.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 2091.48,
+      "dur": 4.333000000000084,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 2107.48,
+      "dur": 0.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 2166.271,
+      "dur": 0.9169999999999163,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 2178.563,
+      "dur": 0.9169999999999163,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::new_zeros",
+      "ph": "X",
+      "ts": 3829.007,
+      "dur": 62.541999999999916,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::new_empty",
+      "ph": "X",
+      "ts": 3864.674,
+      "dur": 13.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 3876.799,
+      "dur": 1.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::new_zeros",
+      "ph": "X",
+      "ts": 12103.107,
+      "dur": 6.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::new_empty",
+      "ph": "X",
+      "ts": 12103.899,
+      "dur": 5.208000000000538,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 12104.607,
+      "dur": 4.416999999999462,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::new_zeros",
+      "ph": "X",
+      "ts": 13612.927,
+      "dur": 2.7919999999994616,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::new_empty",
+      "ph": "X",
+      "ts": 13613.427,
+      "dur": 1.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 13613.886,
+      "dur": 1.2079999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::new_zeros",
+      "ph": "X",
+      "ts": 13848.675,
+      "dur": 2.334000000000742,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::new_empty",
+      "ph": "X",
+      "ts": 13849.134,
+      "dur": 1.4580000000005384,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 13849.55,
+      "dur": 0.9590000000007421,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::new_zeros",
+      "ph": "X",
+      "ts": 14076.798,
+      "dur": 2.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 128,
+        "cpu_memory_usage_mb": 0.0001220703125
+      }
+    },
+    {
+      "name": "aten::new_empty",
+      "ph": "X",
+      "ts": 14077.215,
+      "dur": 1.4169999999994616,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 128,
+        "cpu_memory_usage_mb": 0.0001220703125
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 14077.59,
+      "dur": 0.9580000000005384,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 128,
+        "cpu_memory_usage_mb": 0.0001220703125
+      }
+    },
+    {
+      "name": "aten::new_zeros",
+      "ph": "X",
+      "ts": 15446.246,
+      "dur": 2.8330000000005384,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::new_empty",
+      "ph": "X",
+      "ts": 15446.704,
+      "dur": 1.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 15447.079,
+      "dur": 1.2919999999994616,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "register_parameters",
+      "ph": "X",
+      "ts": 17214.482,
+      "dur": 13333.682,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 737,
+        "cpu_memory_usage_mb": 0.0007028579711914062
+      }
+    },
+    {
+      "name": "aten::isfinite",
+      "ph": "X",
+      "ts": 18471.68,
+      "dur": 62.498999999999796,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::eq",
+      "ph": "X",
+      "ts": 18484.096,
+      "dur": 7.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 18492.096,
+      "dur": 8.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 18495.887,
+      "dur": 4.084000000002561,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 18501.596,
+      "dur": 27.5,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 18506.679,
+      "dur": 19.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 18507.554,
+      "dur": 18.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 18509.012,
+      "dur": 1.6670000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::mul",
+      "ph": "X",
+      "ts": 18530.096,
+      "dur": 3.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 18539.304,
+      "dur": 6.417000000001281,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 18540.804,
+      "dur": 3.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 18541.137,
+      "dur": 2.834000000002561,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 18541.762,
+      "dur": 0.7920000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::__and__",
+      "ph": "X",
+      "ts": 18548.512,
+      "dur": 4.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::bitwise_and",
+      "ph": "X",
+      "ts": 18549.429,
+      "dur": 3.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::masked_select",
+      "ph": "X",
+      "ts": 18590.471,
+      "dur": 1095.3239999999969,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::sum",
+      "ph": "X",
+      "ts": 18954.343,
+      "dur": 548.5360000000001,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 19297.423,
+      "dur": 15.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 19297.84,
+      "dur": 14.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 19298.506,
+      "dur": 0.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 19696.212,
+      "dur": 3.3739999999997963,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 19697.752,
+      "dur": 1.6670000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 19704.252,
+      "dur": 195.2489999999998,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 19704.586,
+      "dur": 194.79000000000087,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 19885.835,
+      "dur": 1.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::min",
+      "ph": "X",
+      "ts": 20092.083,
+      "dur": 324.95600000000195,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 20243.457,
+      "dur": 1.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::max",
+      "ph": "X",
+      "ts": 20426.789,
+      "dur": 188.79000000000087,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 20592.87,
+      "dur": 0.8340000000025611,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::ceil",
+      "ph": "X",
+      "ts": 20908.827,
+      "dur": 348.4549999999981,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 21260.199,
+      "dur": 2.541000000001077,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::div",
+      "ph": "X",
+      "ts": 21274.074,
+      "dur": 2.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 21279.24,
+      "dur": 3.2919999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 21285.282,
+      "dur": 1.4989999999997963,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::lt",
+      "ph": "X",
+      "ts": 21290.031,
+      "dur": 2.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 21643.696,
+      "dur": 1.1660000000010768,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "redistribute_and_register",
+      "ph": "X",
+      "ts": 21901.484,
+      "dur": 2092.649999999998,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "Redistribute",
+      "ph": "X",
+      "ts": 21993.818,
+      "dur": 1168.9480000000003,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "_c10d_functional::all_gather_into_tensor",
+      "ph": "X",
+      "ts": 22095.65,
+      "dur": 304.0799999999981,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 22099.15,
+      "dur": 4.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 22430.772,
+      "dur": 3.4169999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "_c10d_functional::wait_tensor",
+      "ph": "X",
+      "ts": 22453.272,
+      "dur": 454.3709999999992,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": -192,
+        "cpu_memory_usage_mb": -0.00018310546875
+      }
+    },
+    {
+      "name": "aten::isfinite",
+      "ph": "X",
+      "ts": 24086.426,
+      "dur": 21.165000000000873,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::eq",
+      "ph": "X",
+      "ts": 24087.301,
+      "dur": 3.416000000001077,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 24091.217,
+      "dur": 4.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 24093.009,
+      "dur": 2.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 24096.051,
+      "dur": 8.332000000002154,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 24098.216,
+      "dur": 4.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 24099.008,
+      "dur": 3.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 24099.841,
+      "dur": 0.7089999999989232,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::mul",
+      "ph": "X",
+      "ts": 24104.925,
+      "dur": 1.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 24110.091,
+      "dur": 4.708999999998923,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 24111.216,
+      "dur": 2.4170000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 24111.466,
+      "dur": 2.0420000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 24111.925,
+      "dur": 0.4580000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::__and__",
+      "ph": "X",
+      "ts": 24116.925,
+      "dur": 2.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::bitwise_and",
+      "ph": "X",
+      "ts": 24117.425,
+      "dur": 2.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::masked_select",
+      "ph": "X",
+      "ts": 24122.133,
+      "dur": 17.83299999999872,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::sum",
+      "ph": "X",
+      "ts": 24124.383,
+      "dur": 11.33299999999872,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 24130.8,
+      "dur": 2.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 24131.216,
+      "dur": 2.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 24131.716,
+      "dur": 0.5420000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 24143.05,
+      "dur": 1.8330000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 24143.966,
+      "dur": 0.8339999999989232,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 24147.8,
+      "dur": 2.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 24148.091,
+      "dur": 2.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 24148.716,
+      "dur": 0.5,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::min",
+      "ph": "X",
+      "ts": 24152.966,
+      "dur": 2.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::max",
+      "ph": "X",
+      "ts": 24158.591,
+      "dur": 1.9170000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 24159.175,
+      "dur": 0.41600000000107684,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::ceil",
+      "ph": "X",
+      "ts": 24178.966,
+      "dur": 2.0420000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 24182.3,
+      "dur": 1.1660000000010768,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::div",
+      "ph": "X",
+      "ts": 24189.05,
+      "dur": 1.5830000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 24192.466,
+      "dur": 2.333999999998923,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 24197.508,
+      "dur": 1.3329999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 9,
+        "cpu_memory_usage_mb": 8.58306884765625e-06
+      }
+    },
+    {
+      "name": "aten::lt",
+      "ph": "X",
+      "ts": 24201.383,
+      "dur": 1.9169999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 24312.299,
+      "dur": 0.8330000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "redistribute_and_register",
+      "ph": "X",
+      "ts": 24462.173,
+      "dur": 1019.4490000000005,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "Redistribute",
+      "ph": "X",
+      "ts": 24488.422,
+      "dur": 285.66400000000067,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "_c10d_functional::all_gather_into_tensor",
+      "ph": "X",
+      "ts": 24539.213,
+      "dur": 18.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 24540.172,
+      "dur": 1.1660000000010768,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 24566.547,
+      "dur": 1.4160000000010768,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "_c10d_functional::wait_tensor",
+      "ph": "X",
+      "ts": 24580.63,
+      "dur": 178.1229999999996,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": -32,
+        "cpu_memory_usage_mb": -3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::isfinite",
+      "ph": "X",
+      "ts": 25579.496,
+      "dur": 20.208000000002357,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::eq",
+      "ph": "X",
+      "ts": 25580.079,
+      "dur": 2.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 25583.204,
+      "dur": 3.4169999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 25585.246,
+      "dur": 1.2920000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 25587.246,
+      "dur": 6.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 25588.663,
+      "dur": 3.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 25589.288,
+      "dur": 2.5829999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 25589.788,
+      "dur": 0.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::mul",
+      "ph": "X",
+      "ts": 25597.579,
+      "dur": 1.4169999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 25601.871,
+      "dur": 4.167000000001281,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 28,
+        "cpu_memory_usage_mb": 2.6702880859375e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 25602.829,
+      "dur": 2.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 25603.079,
+      "dur": 1.7919999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 25603.621,
+      "dur": 0.41700000000128057,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::__and__",
+      "ph": "X",
+      "ts": 25607.496,
+      "dur": 2.0830000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::bitwise_and",
+      "ph": "X",
+      "ts": 25607.788,
+      "dur": 1.7079999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 24,
+        "cpu_memory_usage_mb": 2.288818359375e-05
+      }
+    },
+    {
+      "name": "aten::masked_select",
+      "ph": "X",
+      "ts": 25611.579,
+      "dur": 14.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::sum",
+      "ph": "X",
+      "ts": 25612.996,
+      "dur": 9.583000000002357,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 25618.371,
+      "dur": 2.5,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 25618.621,
+      "dur": 2.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 25619.079,
+      "dur": 0.45899999999892316,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 25628.954,
+      "dur": 1.7919999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 25629.871,
+      "dur": 0.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 96,
+        "cpu_memory_usage_mb": 9.1552734375e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 25633.829,
+      "dur": 3.0419999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 25634.329,
+      "dur": 2.458999999998923,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 25634.954,
+      "dur": 0.5,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::min",
+      "ph": "X",
+      "ts": 25639.038,
+      "dur": 2.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 25639.621,
+      "dur": 0.6670000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::max",
+      "ph": "X",
+      "ts": 25647.579,
+      "dur": 1.9589999999989232,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 25648.246,
+      "dur": 0.4580000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::ceil",
+      "ph": "X",
+      "ts": 25684.704,
+      "dur": 1.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 25687.328,
+      "dur": 1.2089999999989232,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::div",
+      "ph": "X",
+      "ts": 25696.37,
+      "dur": 1.4580000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 25699.287,
+      "dur": 2.0829999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 9,
+        "cpu_memory_usage_mb": 8.58306884765625e-06
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 25703.995,
+      "dur": 1.4580000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::lt",
+      "ph": "X",
+      "ts": 25707.828,
+      "dur": 1.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 25998.41,
+      "dur": 0.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "redistribute_and_register",
+      "ph": "X",
+      "ts": 26139.992,
+      "dur": 456.4960000000028,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "Redistribute",
+      "ph": "X",
+      "ts": 26165.95,
+      "dur": 290.9559999999983,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "_c10d_functional::all_gather_into_tensor",
+      "ph": "X",
+      "ts": 26211.408,
+      "dur": 16.291000000001077,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 26212.283,
+      "dur": 1.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 26234.449,
+      "dur": 1.3339999999989232,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 192,
+        "cpu_memory_usage_mb": 0.00018310546875
+      }
+    },
+    {
+      "name": "_c10d_functional::wait_tensor",
+      "ph": "X",
+      "ts": 26249.074,
+      "dur": 191.4979999999996,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": -192,
+        "cpu_memory_usage_mb": -0.00018310546875
+      }
+    },
+    {
+      "name": "aten::isfinite",
+      "ph": "X",
+      "ts": 26673.07,
+      "dur": 15.958999999998923,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::eq",
+      "ph": "X",
+      "ts": 26673.612,
+      "dur": 2.0829999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 26676.112,
+      "dur": 3.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 26677.529,
+      "dur": 1.4580000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 26679.612,
+      "dur": 6.707999999998719,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 26680.945,
+      "dur": 3.5420000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 26681.529,
+      "dur": 2.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::mul",
+      "ph": "X",
+      "ts": 26686.82,
+      "dur": 1.4589999999989232,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 26690.779,
+      "dur": 4.291000000001077,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 26691.779,
+      "dur": 2.166000000001077,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 26692.07,
+      "dur": 1.7920000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::__and__",
+      "ph": "X",
+      "ts": 26696.612,
+      "dur": 2.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::bitwise_and",
+      "ph": "X",
+      "ts": 26697.07,
+      "dur": 1.8339999999989232,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::masked_select",
+      "ph": "X",
+      "ts": 26701.029,
+      "dur": 11.833000000002357,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::sum",
+      "ph": "X",
+      "ts": 26702.737,
+      "dur": 6.791999999997643,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 26705.529,
+      "dur": 2.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 26705.779,
+      "dur": 2.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 26706.237,
+      "dur": 0.45799999999871943,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 26715.279,
+      "dur": 1.7080000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 26716.154,
+      "dur": 0.7080000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 26719.612,
+      "dur": 2.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 26719.904,
+      "dur": 2.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 26720.612,
+      "dur": 0.5,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::min",
+      "ph": "X",
+      "ts": 26724.029,
+      "dur": 2.416000000001077,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::max",
+      "ph": "X",
+      "ts": 26729.07,
+      "dur": 1.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 26729.529,
+      "dur": 0.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::ceil",
+      "ph": "X",
+      "ts": 26742.487,
+      "dur": 1.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 26744.987,
+      "dur": 1.125,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::div",
+      "ph": "X",
+      "ts": 26750.695,
+      "dur": 1.4170000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 26753.237,
+      "dur": 1.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 26757.737,
+      "dur": 1.3329999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::lt",
+      "ph": "X",
+      "ts": 26761.445,
+      "dur": 1.7920000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 26864.861,
+      "dur": 0.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "redistribute_and_register",
+      "ph": "X",
+      "ts": 26997.735,
+      "dur": 443.5789999999979,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "Redistribute",
+      "ph": "X",
+      "ts": 27017.86,
+      "dur": 262.7469999999994,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "_c10d_functional::all_gather_into_tensor",
+      "ph": "X",
+      "ts": 27055.692,
+      "dur": 15.41700000000128,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 27056.567,
+      "dur": 0.9170000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 27077.359,
+      "dur": 0.9579999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "_c10d_functional::wait_tensor",
+      "ph": "X",
+      "ts": 27090.484,
+      "dur": 164.41600000000108,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": -32,
+        "cpu_memory_usage_mb": -3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::isfinite",
+      "ph": "X",
+      "ts": 27560.522,
+      "dur": 44.66599999999744,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::eq",
+      "ph": "X",
+      "ts": 27563.813,
+      "dur": 3.834000000002561,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 27568.23,
+      "dur": 21.79200000000128,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 128,
+        "cpu_memory_usage_mb": 0.0001220703125
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 27587.272,
+      "dur": 2.5,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 128,
+        "cpu_memory_usage_mb": 0.0001220703125
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 27590.73,
+      "dur": 10.70799999999872,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 27593.397,
+      "dur": 5.290999999997439,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 27594.188,
+      "dur": 4.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 27595.272,
+      "dur": 1.0409999999974389,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::mul",
+      "ph": "X",
+      "ts": 27602.063,
+      "dur": 2.209000000002561,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 27608.23,
+      "dur": 5.167000000001281,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 27609.355,
+      "dur": 2.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 27609.647,
+      "dur": 2.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::__and__",
+      "ph": "X",
+      "ts": 27615.272,
+      "dur": 3.3329999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::bitwise_and",
+      "ph": "X",
+      "ts": 27615.897,
+      "dur": 2.5829999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::masked_select",
+      "ph": "X",
+      "ts": 27621.272,
+      "dur": 21.54099999999744,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 128,
+        "cpu_memory_usage_mb": 0.0001220703125
+      }
+    },
+    {
+      "name": "aten::sum",
+      "ph": "X",
+      "ts": 27623.522,
+      "dur": 14.58299999999872,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 27627.188,
+      "dur": 8.54200000000128,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 27633.188,
+      "dur": 2.459000000002561,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 27633.73,
+      "dur": 0.5829999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 27645.896,
+      "dur": 2.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 128,
+        "cpu_memory_usage_mb": 0.0001220703125
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 27646.937,
+      "dur": 0.875,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 128,
+        "cpu_memory_usage_mb": 0.0001220703125
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 27651.187,
+      "dur": 2.9169999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 27651.521,
+      "dur": 2.5,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "aten::min",
+      "ph": "X",
+      "ts": 27656.521,
+      "dur": 2.916000000001077,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 27657.146,
+      "dur": 0.5410000000010768,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::max",
+      "ph": "X",
+      "ts": 27662.562,
+      "dur": 1.9589999999989232,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 27663.187,
+      "dur": 0.45899999999892316,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::ceil",
+      "ph": "X",
+      "ts": 27709.062,
+      "dur": 3.958999999998923,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 27714.354,
+      "dur": 1.5830000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::div",
+      "ph": "X",
+      "ts": 27725.937,
+      "dur": 1.9169999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 27729.729,
+      "dur": 2.7920000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 27735.396,
+      "dur": 1.5410000000010768,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::lt",
+      "ph": "X",
+      "ts": 27739.562,
+      "dur": 2.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 28115.393,
+      "dur": 1.3329999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "redistribute_and_register",
+      "ph": "X",
+      "ts": 28290.932,
+      "dur": 1178.4079999999994,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "Redistribute",
+      "ph": "X",
+      "ts": 28325.307,
+      "dur": 318.2469999999994,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "_c10d_functional::all_gather_into_tensor",
+      "ph": "X",
+      "ts": 28384.056,
+      "dur": 24.708999999998923,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 28385.14,
+      "dur": 1.0830000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 28432.64,
+      "dur": 1.5410000000010768,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 256,
+        "cpu_memory_usage_mb": 0.000244140625
+      }
+    },
+    {
+      "name": "_c10d_functional::wait_tensor",
+      "ph": "X",
+      "ts": 28437.306,
+      "dur": 180.66600000000108,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": -256,
+        "cpu_memory_usage_mb": -0.000244140625
+      }
+    },
+    {
+      "name": "aten::isfinite",
+      "ph": "X",
+      "ts": 29571.297,
+      "dur": 25.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::eq",
+      "ph": "X",
+      "ts": 29572.339,
+      "dur": 3.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 29576.547,
+      "dur": 4.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 29578.547,
+      "dur": 2.5,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 29582.172,
+      "dur": 10.91700000000128,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 29585.172,
+      "dur": 5.584000000002561,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 29586.339,
+      "dur": 4.292000000001281,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 29587.422,
+      "dur": 1.0840000000025611,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::mul",
+      "ph": "X",
+      "ts": 29593.672,
+      "dur": 2.209000000002561,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 29599.63,
+      "dur": 4.832999999998719,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 29600.63,
+      "dur": 2.3329999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 29600.88,
+      "dur": 2.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 29601.338,
+      "dur": 0.5829999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::__and__",
+      "ph": "X",
+      "ts": 29606.338,
+      "dur": 3.25,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::bitwise_and",
+      "ph": "X",
+      "ts": 29607.046,
+      "dur": 2.4170000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::masked_select",
+      "ph": "X",
+      "ts": 29612.213,
+      "dur": 49.91700000000128,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::sum",
+      "ph": "X",
+      "ts": 29631.088,
+      "dur": 25.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 29640.755,
+      "dur": 11.33299999999872,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 29641.838,
+      "dur": 10.16700000000128,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 29643.713,
+      "dur": 1.9170000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 29674.546,
+      "dur": 4.584000000002561,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::abs",
+      "ph": "X",
+      "ts": 29677.13,
+      "dur": 1.7079999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 16,
+        "cpu_memory_usage_mb": 1.52587890625e-05
+      }
+    },
+    {
+      "name": "aten::to",
+      "ph": "X",
+      "ts": 29685.088,
+      "dur": 3.3329999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::_to_copy",
+      "ph": "X",
+      "ts": 29685.38,
+      "dur": 2.915999999997439,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty_strided",
+      "ph": "X",
+      "ts": 29686.088,
+      "dur": 0.7079999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::min",
+      "ph": "X",
+      "ts": 29691.088,
+      "dur": 3.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 29691.838,
+      "dur": 0.7079999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::max",
+      "ph": "X",
+      "ts": 29698.213,
+      "dur": 2.375,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 29699.005,
+      "dur": 0.625,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::ceil",
+      "ph": "X",
+      "ts": 29724.67,
+      "dur": 2.75,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 4,
+        "cpu_memory_usage_mb": 3.814697265625e-06
+      }
+    },
+    {
+      "name": "aten::ne",
+      "ph": "X",
+      "ts": 29729.42,
+      "dur": 3.0420000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::div",
+      "ph": "X",
+      "ts": 29739.67,
+      "dur": 2.334000000002561,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 8,
+        "cpu_memory_usage_mb": 7.62939453125e-06
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 29744.587,
+      "dur": 3.4170000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::gt",
+      "ph": "X",
+      "ts": 29750.879,
+      "dur": 1.5829999999987194,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::lt",
+      "ph": "X",
+      "ts": 29755.545,
+      "dur": 2.1670000000012806,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 29909.711,
+      "dur": 1.2080000000023574,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 1,
+        "cpu_memory_usage_mb": 9.5367431640625e-07
+      }
+    },
+    {
+      "name": "redistribute_and_register",
+      "ph": "X",
+      "ts": 30070.085,
+      "dur": 445.2459999999992,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "Redistribute",
+      "ph": "X",
+      "ts": 30097.334,
+      "dur": 275.0400000000009,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "_c10d_functional::all_gather_into_tensor",
+      "ph": "X",
+      "ts": 30142.876,
+      "dur": 18.291000000001077,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 30144.042,
+      "dur": 1.4169999999976426,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "aten::empty",
+      "ph": "X",
+      "ts": 30169.042,
+      "dur": 1.0,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": 32,
+        "cpu_memory_usage_mb": 3.0517578125e-05
+      }
+    },
+    {
+      "name": "_c10d_functional::wait_tensor",
+      "ph": "X",
+      "ts": 30188.001,
+      "dur": 164.3729999999996,
+      "pid": 0,
+      "tid": 0,
+      "args": {
+        "cpu_memory_usage": -32,
+        "cpu_memory_usage_mb": -3.0517578125e-05
+      }
+    }
+  ]
+}

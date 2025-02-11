@@ -18,12 +18,13 @@ class FeedForward(nn.Module):
         *,
         dim,
         hidden_dim,
+        bias: bool = False,
         activation: nn.Module = nn.SiLU(),
     ):
         super().__init__()
-        self.w1 = nn.Linear(dim, hidden_dim, bias=False)
-        self.w3 = nn.Linear(dim, hidden_dim, bias=False)
-        self.w2 = nn.Linear(hidden_dim, hidden_dim, bias=False)
+        self.w1 = nn.Linear(dim, hidden_dim, bias=bias)
+        self.w3 = nn.Linear(dim, hidden_dim, bias=bias)
+        self.w2 = nn.Linear(hidden_dim, hidden_dim, bias=bias)
         self.activation = activation
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:

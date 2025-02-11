@@ -13,44 +13,47 @@ def get_fsdp_modules(model):
 
 def test_fsdp_tp_switch(model, device_mesh):
     fsdp_modules = get_fsdp_modules(model)
-    original_pre_forwards = {} # Store original _pre_forward methods
+    original_attrs = {}
+    state_hooks = []
 
-    # 1. Selectively Disable FSDP's Parameter Management in _pre_forward
+    # 1. Disable FSDP forward processing
+    fsdp_modules = get_fsdp_modules(model)
+    param_groups = []
+    
+    # 1. Destroy FSDP parameter groups
     for module in fsdp_modules:
         state = _get_module_fsdp_state(module)
-        if not state:
-            continue
+        if state and state._fsdp_param_group:
+            param_groups.append(state._fsdp_param_group)
+            state._fsdp_param_group = None
 
-        original_pre_forwards[module] = state._pre_forward # Save original
-
-        # Modified _pre_forward that bypasses parameter sharding/init
-        def _bypass_param_mgmt_pre_forward(fsdp_state, module, args, kwargs): # Matches FSDPState._pre_forward signature
-            # Keep other parts of pre_forward if needed, but bypass parameter logic
-            return args, kwargs # Just return original args, kwargs - NO FSDP param handling
-
-        state._pre_forward = functools.partial(_bypass_param_mgmt_pre_forward, state) # Partial to bind state as first arg
-
+    # 2. Apply tensor parallelism
+    print(f"weight before TP", model.w2.weight.placements)
+    # 3. Apply tensor parallelism
     print(f"weighta before redis", model.w2.weight.placements) # Placement before redistribute
     # 2. Apply tensor parallelism (redistribute)
     redistribute(model, device_mesh)
     print(f"weighta after redis", model.w2.weight.placements) # Placement after redistribute
 
-    dummy_input = torch.randn(4, 6)
+    dummy_input = torch.randn(8``, 6)
     model(dummy_input) # Test forward pass in TP mode
 
     # 3. Restore original _pre_forward hooks
+    # 4. Restore original behavior
     for module in fsdp_modules:
-        if module in original_pre_forwards:
-            state = _get_module_fsdp_state(module)
-            state._pre_forward = original_pre_forwards[module] # Restore original
+        if module in original_attrs:
+            module._call_impl = original_attrs[module]['_call_impl']
+            
+    for state, pre_hook, post_hook in state_hooks:
+        state._pre_forward = pre_hook
+        state._post_forward = post_hook
 
-    # 4. Reshard with FSDP (after restoring hooks)
+    # 5. Reset FSDP states
     for module in fsdp_modules:
-        state = _get_module_fsdp_state(module)
-        if state:
-            state._reset_lazy_init()
         if hasattr(module, "reshard"):
             module.reshard()
+        state = _get_module_fsdp_state(module)
+        state._reset_lazy_init()
     print(f"weighta after reshard", model.w2.weight.placements) # Placement after reshard
 
 
