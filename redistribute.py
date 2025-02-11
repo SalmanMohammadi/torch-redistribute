@@ -53,11 +53,12 @@ def main():
     device_mesh = init_device_mesh("cpu", (world_size,))
 
     model = FeedForward(dim=6, hidden_dim=8)
-    fully_shard(model, mesh=device_mesh)
-    if dist.get_rank() == 0:
-        import pdb
+    
+    # fully_shard(model, mesh=device_mesh)
+    # if dist.get_rank() == 0:
+    #     import pdb
 
-        pdb.set_trace()
+    #     pdb.set_trace()
     # distribute_replicate(model, device_mesh)
     # print_model(model)
     # model(torch.randn(4, 6))

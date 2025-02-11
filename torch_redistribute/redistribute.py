@@ -4,6 +4,7 @@ from typing import Callable
 
 import torch
 import torch.nn as nn
+from torch.distributed.fsdp._fully_shard._fsdp_param import free_storage
 from torch.distributed.tensor import DTensor
 
 from torch_redistribute.utils import printr, redistribute
@@ -23,12 +24,14 @@ class RedistributeContext:
         self.fsdp_placements = {}
 
         for m_name, module in model.named_modules():
+            if not m_name:  # Skip the root module
+                continue
             module_spec = {
                 name: param.placements for name, param in module.named_parameters()
             }
             self.fsdp_placements[m_name] = module_spec
 
-    def restore_fsdp_state(self):
+    def _restore_fsdp_state(self):
         for (m_name, module), (_, generate_module) in zip(
             self.model.named_modules(), self.generate_model.named_modules()
         ):
@@ -47,21 +50,24 @@ class RedistributeContext:
                         name,
                         nn.Parameter(redistributed_param),
                     )
-                    del param
-                    del generate_param
+                    free_storage(generate_param.to_local())
+                    free_storage(param.to_local())
 
-    def to_tensor_parallel(self):
+    def _to_tensor_parallel(self):
         redistribute(self.model, self.device_mesh)
         for (module_name, module_a), (_, module_b) in zip(
             self.model.named_modules(), self.generate_model.named_modules()
         ):
             if module_name:
                 for param_name, param in module_a.named_parameters():
-                    printr(param_name, module_name)
-                    module_b.register_parameter(param_name, param)
+                    printr(module_a, param)
+                    module_b.register_parameter(param_name, param.detach().clone())
 
     def __enter__(self):
-        self.to_tensor_parallel()
+        torch.distributed.barrier()
+        self._to_tensor_parallel()
+        return self.generate_model
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.restore_fsdp_state()
+        torch.distributed.barrier()
+        self._restore_fsdp_state()
