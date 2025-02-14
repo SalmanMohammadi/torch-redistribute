@@ -50,8 +50,8 @@ class RedistributeContext:
                         name,
                         nn.Parameter(redistributed_param),
                     )
-                    free_storage(generate_param.to_local())
-                    free_storage(param.to_local())
+                    free_storage(generate_param)
+                    free_storage(param)
 
     def _to_tensor_parallel(self):
         redistribute(self.model, self.device_mesh)
@@ -61,13 +61,13 @@ class RedistributeContext:
             if module_name:
                 for param_name, param in module_a.named_parameters():
                     printr(module_a, param)
-                    module_b.register_parameter(param_name, param.detach().clone())
+                    module_b.register_parameter(param_name, param)
 
     def __enter__(self):
-        torch.distributed.barrier()
+        # torch.distributed.barrier()
         self._to_tensor_parallel()
         return self.generate_model
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        torch.distributed.barrier()
+        # torch.distributed.barrier()
         self._restore_fsdp_state()

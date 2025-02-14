@@ -1,3 +1,4 @@
+# torchrun --nnodes=1 --nproc-per-node=2 test_redistribute_ctx_manager.py
 import os
 from functools import partial
 
@@ -28,9 +29,18 @@ def print_tensor_storage(tensor: torch.Tensor, name: str):
 
 
 def main():
-    dist.init_process_group(backend="gloo")
+    if torch.cuda.is_available():
+        backend = "nccl"
+        device_name = "cuda"
+    else:
+        backend = "gloo"
+        device_name = "cpu"
+    dist.init_process_group(backend=backend)
     world_size = dist.get_world_size()
-    device_mesh = init_device_mesh("cpu", (world_size,), mesh_dim_names=["data"])
+    rank = dist.get_rank()
+    if torch.cuda.is_available():
+        torch.cuda.set_device(rank)
+    device_mesh = init_device_mesh(device_name, (world_size,), mesh_dim_names=["data"])
 
     model_cls = partial(FeedForward, dim=6, hidden_dim=8, bias=False)
     model = model_cls()
@@ -51,7 +61,6 @@ def main():
         printr("Inside context manager - first redistribution")
         printr(generation_model.w2.weight)
         # torch.distributed.breakpoint()
-        x = 10
         # printr(
         #     generation_model.w2.weight, "generation_model.w2.weight (during first)"
         # )
