@@ -40,8 +40,10 @@ class FeedForward(nn.Module):
             torch.Tensor: output tensor with shape ``(..., out_dim)``, where ``out_dim`` is the \
             output dimension of ``down_proj``.
         """
-        # printr(x.shape, self.w1.weight.shape)
-        h = self.activation(self.w1(x))
+        printr("input", x, self.w1.weight)
+        w1_out = self.w1(x)
+        printr("w1 out", w1_out, self.w2.weight)
+        h = self.activation(w1_out)
         h = h * self.w3(x)
         h = self.w2(h)
         return h

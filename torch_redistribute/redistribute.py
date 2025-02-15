@@ -60,7 +60,6 @@ class RedistributeContext:
         ):
             if module_name:
                 for param_name, param in module_a.named_parameters():
-                    printr(module_a, param)
                     module_b.register_parameter(param_name, param)
 
     def __enter__(self):

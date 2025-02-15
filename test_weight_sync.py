@@ -18,6 +18,7 @@ def print_tensor_storage(tensor: torch.Tensor, name: str):
 
 
 def main():
+    
     dist.init_process_group(backend="gloo")
     world_size = dist.get_world_size()
     device_mesh = init_device_mesh("cpu", (world_size,), mesh_dim_names=["data"])
