@@ -152,22 +152,6 @@ def redistribute_module_weights_only(
         )
 
     device_mesh = device_mesh or _mesh_resources.get_current_mesh()
-    device_type = device_mesh.device_type
-    if device_type == "xla":
-        try:
-            # This function annotates all module parameters for auto-partitioning with
-            # PyTorch/XLA SPMD or explicitly partition to :class:`XLAShardedTensor` parameters
-            # according to the `partition_fn` specified.
-            from torch_xla.distributed.spmd import (  # type:ignore[import]
-                xla_distribute_module,
-            )
-
-            return xla_distribute_module(
-                module, device_mesh, partition_fn, input_fn, output_fn
-            )  # type:ignore[return-value]
-        except ImportError as e:
-            msg = "To use DTensor API with xla, you must install the torch_xla package!"
-            raise ImportError(msg) from e
 
     def replicate_module_params_buffers(m: nn.Module, mesh: DeviceMesh) -> None:
         # This function loop over the immediate module parameters and

@@ -10,11 +10,11 @@ from torch.distributed.tensor import (
 )
 from torch.distributed.tensor.parallel import (
     ColwiseParallel,
-    ParallelStyle,
+    ParallelStyle,   
     RowwiseParallel,
 )
 from torch.distributed.fsdp._fully_shard._fsdp_param import free_storage
-from torch_redistribute.redistribute import redistribute_module
+from torch_redistribute.module_utils import redistribute_module_weights_only
 from torch.distributed.device_mesh import DeviceMesh
 
 class ReplicateParallel(ParallelStyle):
@@ -77,7 +77,7 @@ class RedistributeColWiseParallel(ColwiseParallel):
                 "ColwiseParallel currently only support nn.Linear and nn.Embedding!"
             )
 
-        return redistribute_module(
+        return redistribute_module_weights_only(
             module,
             device_mesh,
             partition_fn,
@@ -127,7 +127,7 @@ class RedistributeRowWiseParallel(RowwiseParallel):
                 "ColwiseParallel currently only support nn.Linear and nn.Embedding!"
             )
 
-        return redistribute_module(
+        return redistribute_module_weights_only(
             module,
             device_mesh,
             partition_fn,

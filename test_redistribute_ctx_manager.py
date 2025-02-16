@@ -78,6 +78,9 @@ def main():
     print_tensor_storage(model.w2.weight, "model1.w2.weight (after first)")
     print_tensor_distribution(model.w2.weight, "model1.w2.weight", rank)
 
+    out = model(torch.randn(8, 6))
+    out.mean().backward()
+
     with redistributed_model_ctx as generation_model, torch.no_grad():
         printr("=" * 50)
         printr("Inside context manager - second redistribution")
@@ -87,6 +90,7 @@ def main():
         print_tensor_distribution(
             generation_model.w2.weight, "generation_model.w2.weight", rank
         )
+        generation_model(torch.randn(8, 6))
         torch.distributed.barrier()
 
     printr("=" * 50)
@@ -94,6 +98,8 @@ def main():
     print_tensor_storage(model.w2.weight, "model1.w2.weight (after second)")
     print_tensor_distribution(model.w2.weight, "model1.w2.weight", rank)
 
+    out = model(torch.randn(8, 6))
+    out.mean().backward()
     dist.destroy_process_group()
 
 
