@@ -45,6 +45,8 @@ def main():
     model_cls = partial(FeedForward, dim=6, hidden_dim=8, bias=False)
     model = model_cls()
     fully_shard(model, mesh=device_mesh)
+    out = model(torch.randn(8, 6))
+    out.mean().backward()
     # parallelize_module(
     #     model,
     #     device_mesh,
