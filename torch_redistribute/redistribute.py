@@ -37,14 +37,11 @@ class RedistributeContext:
     def __init__(
         self,
         model: nn.Module,
-        model_cls: Callable,
+        tp_model: nn.Module,
         device_mesh: torch.distributed.device_mesh.DeviceMesh,
     ):
         self.model = model # this module should contain pre-post forward/backward hooks for FSDP
-        with torch.device("meta"), torch.no_grad():
-            # at this point, this module should contain the correct pre forward / forward hooks for the TP plan
-            self.generate_model = model_cls()
-        distribute(self.generate_model, device_mesh)
+        self.tp_model = tp_model
         self.device_mesh = device_mesh
         self.fsdp_placements = {}
 
@@ -55,10 +52,10 @@ class RedistributeContext:
                 name: param.placements for name, param in module.named_parameters()
             }
             self.fsdp_placements[m_name] = module_spec
-
+        
     def _restore_fsdp_state(self):
         for (m_name, module), (_, generate_module) in zip(
-            self.model.named_modules(), self.generate_model.named_modules()
+            self.model.named_modules(), self.tp_model.named_modules()
         ):
             if not m_name:
                 continue
@@ -77,24 +74,39 @@ class RedistributeContext:
                     )
                     # free_storage(generate_param)
                     # free_storage(param)
-        
+    
+    def _register_parameters(self, module: nn.Module, tp_module: nn.Module):
+        for (module_name, module_a), (_, module_b) in zip(
+            module.named_modules(), tp_module.named_modules()
+        ):
+            if module_name:
+                printr(module_name)
+                if "." in module_name:
+                    self._register_parameters(module_a, module_b)
+                else:
+                    for param_name, param in module_a.named_parameters():
+                        module_b.register_parameter(param_name, param)
 
     def _to_tensor_parallel(self):
         # now we want to redistribute the underlying tensors, but we don't want to 
         # override the FSDP forward
         redistribute(self.model, self.device_mesh)
+        # self._register_parameters(self.model, self.tp_model)
         for (module_name, module_a), (_, module_b) in zip(
-            self.model.named_modules(), self.generate_model.named_modules()
+            reversed(list(self.model.named_modules())), reversed(list(self.tp_model.named_modules()))
         ):
             if module_name:
-
-                for param_name, param in module_a.named_parameters():
+                printr("module name", module_name)
+                for param_name, param in reversed(list(module_a.named_parameters())):
+                    printr("param name", param_name)
+                    if "." in param_name:
+                        continue
                     module_b.register_parameter(param_name, param)
 
     def __enter__(self):
         # torch.distributed.barrier()
         self._to_tensor_parallel()
-        return self.generate_model
+        return self.tp_model
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         # torch.distributed.barrier()

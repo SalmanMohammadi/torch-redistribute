@@ -43,3 +43,40 @@ class FeedForward(nn.Module):
         h = h * self.w3(x)
         h = self.w2(h)
         return h
+
+class DeepFeedForward(nn.Module):
+    def __init__(
+        self,
+        dim,
+        hidden_dim,
+        depth: int,
+        bias: bool = False,
+        activation: nn.Module = nn.SiLU(),
+    ):
+        super().__init__()
+        self.layers = nn.ModuleList(
+            [
+                FeedForward(
+                    dim=dim, hidden_dim=hidden_dim, bias=bias, activation=activation
+                )
+                for _ in range(depth)
+            ]
+        )
+        self.activation = activation
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        for layer in self.layers:
+            x = layer(x)
+
+        return x
+
+class DummyModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.ff_1 = DeepFeedForward(dim=1024, hidden_dim=4096, depth=8)
+        self.ff_2 = DeepFeedForward(dim=1024, hidden_dim=4096, depth=8)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = self.ff_1(x)
+        x = self.ff_2(x)
+        return x

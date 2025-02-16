@@ -42,8 +42,8 @@ def main():
         torch.cuda.set_device(rank)
     device_mesh = init_device_mesh(device_name, (world_size,), mesh_dim_names=["data"])
 
-    model_cls = partial(FeedForward, dim=6, hidden_dim=8, bias=False)
-    model = model_cls()
+    tp_model = FeedForward(dim=6, hidden_dim=8, bias=False)
+    model = FeedForward(dim=6, hidden_dim=8, bias=False)
     fully_shard(model, mesh=device_mesh)
     out = model(torch.randn(8, 6))
     out.mean().backward()
@@ -54,7 +54,7 @@ def main():
     # )
     rank = dist.get_rank()
 
-    redistributed_model_ctx = RedistributeContext(model, model_cls, device_mesh)
+    redistributed_model_ctx = RedistributeContext(model, tp_model, device_mesh)
 
     print_tensor_distribution(model.w2.weight, "model1.w2.weight", rank)
 

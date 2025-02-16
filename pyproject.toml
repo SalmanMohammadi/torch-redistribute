@@ -4,4 +4,6 @@ version = "0.1.0"
 
 dependencies = [
     "tabulate",
+    "torchtune @ git+https://github.com/pytorch/torchtune.git@main", 
+    "torchao"  
 ]
