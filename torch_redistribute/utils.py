@@ -3,6 +3,8 @@ from torch.distributed.tensor.debug import CommDebugMode, visualize_sharding
 from torch.distributed.tensor.parallel import parallelize_module
 
 from torch_redistribute.style import (
+    ColwiseParallel,
+    RowwiseParallel,
     RedistributeColWiseParallel,
     RedistributeRowWiseParallel,
 )
@@ -46,6 +48,12 @@ redistribute_parallelize_plan = {
 def redistribute(layer: nn.Module, device_mesh):
     parallelize_module(layer, device_mesh, redistribute_parallelize_plan)
 
+def distribute(layer: nn.Module, device_mesh):
+    parallelize_module(layer, device_mesh, {
+        "w1": ColwiseParallel(),
+        "w2": RowwiseParallel(),
+        "w3": ColwiseParallel(),
+    })
 
 def printr(*args):
     import torch.distributed as dist

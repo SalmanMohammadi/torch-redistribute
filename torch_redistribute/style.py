@@ -1,3 +1,4 @@
+from functools import partial
 import torch
 import torch.nn as nn
 from torch.distributed.tensor import (
@@ -13,11 +14,11 @@ from torch.distributed.tensor.parallel import (
     RowwiseParallel,
 )
 from torch.distributed.fsdp._fully_shard._fsdp_param import free_storage
-
+from torch_redistribute.redistribute import redistribute_module
+from torch.distributed.device_mesh import DeviceMesh
 
 class ReplicateParallel(ParallelStyle):
-    @staticmethod
-    def _prepare_input_fn(mod, inputs, device_mesh):
+    def _prepare_input_fn(self, mod, inputs, device_mesh):
         input_tensor = inputs[0]
         if not isinstance(input_tensor, DTensor):
             input_tensor = DTensor.from_local(inputs[0], device_mesh)
@@ -34,6 +35,8 @@ class ReplicateParallel(ParallelStyle):
 
 class RedistributeColWiseParallel(ColwiseParallel):
 
+    fsdp_pre_hook = None
+
     def _partition_linear_fn(self, name, module, device_mesh):
         for name, param in module.named_parameters():
             if isinstance(param, DTensor):
@@ -45,7 +48,7 @@ class RedistributeColWiseParallel(ColwiseParallel):
                         placements=[Shard(0)],
                     )
                 )
-                # free_storage(param.to_local())
+                # free_storage(param)
             else:
                 raise ValueError("Param is not a DTensor!")
             module.register_parameter(name, nn.Parameter(dist_param))
@@ -64,6 +67,21 @@ class RedistributeColWiseParallel(ColwiseParallel):
                 # free_storage(old_weight.to_local())
                 # free_storage(redistributed_weight.to_local())
 
+    def _apply(self, module: nn.Module, device_mesh: DeviceMesh) -> nn.Module:
+        if isinstance(module, nn.Linear):
+            partition_fn = self._partition_linear_fn
+        elif isinstance(module, nn.Embedding):
+            partition_fn = self._partition_embedding_fn
+        else:
+            raise NotImplementedError(
+                "ColwiseParallel currently only support nn.Linear and nn.Embedding!"
+            )
+
+        return redistribute_module(
+            module,
+            device_mesh,
+            partition_fn,
+        )
 
 class RedistributeRowWiseParallel(RowwiseParallel):
 
@@ -98,3 +116,19 @@ class RedistributeRowWiseParallel(RowwiseParallel):
                         placements=[Shard(1)],
                     )
                 )
+
+    def _apply(self, module: nn.Module, device_mesh: DeviceMesh) -> nn.Module:
+        if isinstance(module, nn.Linear):
+            partition_fn = self._partition_linear_fn
+        elif isinstance(module, nn.Embedding):
+            partition_fn = self._partition_embedding_fn
+        else:
+            raise NotImplementedError(
+                "ColwiseParallel currently only support nn.Linear and nn.Embedding!"
+            )
+
+        return redistribute_module(
+            module,
+            device_mesh,
+            partition_fn,
+        )
