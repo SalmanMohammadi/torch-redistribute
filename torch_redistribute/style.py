@@ -1,6 +1,9 @@
 from functools import partial
+
 import torch
 import torch.nn as nn
+from torch.distributed.device_mesh import DeviceMesh
+from torch.distributed.fsdp._fully_shard._fsdp_param import free_storage
 from torch.distributed.tensor import (
     distribute_module,
     distribute_tensor,
@@ -10,12 +13,13 @@ from torch.distributed.tensor import (
 )
 from torch.distributed.tensor.parallel import (
     ColwiseParallel,
-    ParallelStyle,   
+    ParallelStyle,
     RowwiseParallel,
+    SequenceParallel
 )
-from torch.distributed.fsdp._fully_shard._fsdp_param import free_storage
+
 from torch_redistribute.module_utils import redistribute_module_weights_only
-from torch.distributed.device_mesh import DeviceMesh
+
 
 class ReplicateParallel(ParallelStyle):
     def _prepare_input_fn(self, mod, inputs, device_mesh):
@@ -32,40 +36,37 @@ class ReplicateParallel(ParallelStyle):
             input_fn=self._prepare_input_fn,
         )
 
-
 class RedistributeColWiseParallel(ColwiseParallel):
-
-    fsdp_pre_hook = None
 
     def _partition_linear_fn(self, name, module, device_mesh):
         for name, param in module.named_parameters():
-            if isinstance(param, DTensor):
-                if param.placements == [Shard(0)]:
-                    continue
+            if not isinstance(param, DTensor):
+                raise ValueError(
+                    f"Weight {name} in module {module.__class__.__name__} is not a DTensor!"
+                )
+            elif param.placements != (Shard(0),):
                 dist_param = nn.Parameter(
                     param.redistribute(
                         device_mesh=device_mesh,
                         placements=[Shard(0)],
                     )
                 )
-                # free_storage(param)
-            else:
-                raise ValueError("Param is not a DTensor!")
-            module.register_parameter(name, nn.Parameter(dist_param))
+                module.register_parameter(name, nn.Parameter(dist_param))
+                free_storage(param.to_local())
 
     def _partition_embedding_fn(self, name, module, device_mesh):
-        for param in module.parameters():
+        for name, param in module.named_parameters():
             if not isinstance(param, DTensor):
-                super()._partition_embedding_fn(name, module, device_mesh)
-            else:
-                old_weight = param
-                redistributed_weight = param.redistribute(
-                    device_mesh=device_mesh,
-                    placements=[Shard(0)],
+                raise ValueError(
+                    f"Weight {name} in module {module.__class__.__name__} is not a DTensor!"
                 )
-                param = nn.Parameter(redistributed_weight)
-                # free_storage(old_weight.to_local())
-                # free_storage(redistributed_weight.to_local())
+            elif param.placements != (Shard(1),):
+                dist_param = param.redistribute(
+                    device_mesh=device_mesh,
+                    placements=[Shard(1)],
+                )
+                module.register_parameter(name, nn.Parameter(dist_param))
+                free_storage(param.to_local())
 
     def _apply(self, module: nn.Module, device_mesh: DeviceMesh) -> nn.Module:
         if isinstance(module, nn.Linear):
@@ -83,19 +84,23 @@ class RedistributeColWiseParallel(ColwiseParallel):
             partition_fn,
         )
 
+
 class RedistributeRowWiseParallel(RowwiseParallel):
 
     def _partition_linear_fn(self, name, module, device_mesh):
         if not isinstance(module.weight, DTensor):
-            raise ValueError("Weight is not a DTensor!")
-        elif module.weight.placements != [Shard(1)]:
+            raise ValueError(
+                f"Weight {name} in module {module.__class__.__name__} is not a DTensor!"
+            )
+        elif module.weight.placements != (Shard(1),):
             weight = module.weight
             redistributed_weight = weight.redistribute(
                 device_mesh=device_mesh,
                 placements=[Shard(1)],
             )
             module.register_parameter("weight", nn.Parameter(redistributed_weight))
-            # free_storage(weight.to_local())
+            free_storage(weight.to_local())
+
             if getattr(module, "bias", None) is not None:
                 bias = module.bias
                 redistributed_bias = bias.redistribute(
@@ -103,19 +108,21 @@ class RedistributeRowWiseParallel(RowwiseParallel):
                     placements=[Replicate()],
                 )
                 module.register_parameter("bias", nn.Parameter(redistributed_bias))
-                # free_storage(bias.to_local())
+                free_storage(bias.to_local())
 
     def _partition_embedding_fn(self, name, module, device_mesh):
-        for param in module.parameters():
+        for name, param in module.named_parameters():
             if not isinstance(param, DTensor):
-                super()._partition_embedding_fn(name, module, device_mesh)
-            else:
-                param = nn.Parameter(
-                    param.redistribute(
-                        device_mesh=device_mesh,
-                        placements=[Shard(1)],
-                    )
+                raise ValueError(
+                    f"Weight {name} in module {module.__class__.__name__} is not a DTensor!"
                 )
+            elif param.placements != (Shard(0),):
+                dist_param = param.redistribute(
+                    device_mesh=device_mesh,
+                    placements=[Shard(0)],
+                )
+                module.register_parameter(name, nn.Parameter(dist_param))
+                free_storage(param.to_local())
 
     def _apply(self, module: nn.Module, device_mesh: DeviceMesh) -> nn.Module:
         if isinstance(module, nn.Linear):

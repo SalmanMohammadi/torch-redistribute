@@ -14,12 +14,12 @@ from torch.distributed.tensor.parallel import (
     RowwiseParallel,
 )
 
-from torch_redistribute.model import FeedForward
+from torch_redistribute.model import DummyModel, FeedForward
 from torch_redistribute.redistribute import RedistributeContext
 from torch_redistribute.utils import (
+    dummy_redistribute_plan,
     print_tensor_distribution,
     printr,
-    redistribute_parallelize_plan,
 )
 
 
@@ -42,34 +42,26 @@ def main():
         torch.cuda.set_device(rank)
     device_mesh = init_device_mesh(device_name, (world_size,), mesh_dim_names=["data"])
 
-    tp_model = FeedForward(dim=6, hidden_dim=8, bias=False)
-    model = FeedForward(dim=6, hidden_dim=8, bias=False)
+    tp_model = DummyModel(dim=6, depth=2)
+    model = DummyModel(dim=6, depth=2)
     fully_shard(model, mesh=device_mesh)
     out = model(torch.randn(8, 6))
     out.mean().backward()
-    # parallelize_module(
-    #     model,
-    #     device_mesh,
-    #     {"w1": ColwiseParallel(), "w2": RowwiseParallel(), "w3": ColwiseParallel()},
-    # )
     rank = dist.get_rank()
 
-    redistributed_model_ctx = RedistributeContext(model, tp_model, device_mesh)
+    redistributed_model_ctx = RedistributeContext(
+        model, tp_model, device_mesh, dummy_redistribute_plan
+    )
 
-    print_tensor_distribution(model.w2.weight, "model1.w2.weight", rank)
+    print_tensor_distribution(model.ff_1.layers[0].w1.weight, "model.ff_1.layers[0].w1.weight", rank)
 
     with redistributed_model_ctx as generation_model, torch.no_grad():
         printr("=" * 50)
         printr("Inside context manager - first redistribution")
-        printr(generation_model.w2.weight)
-        # torch.distributed.breakpoint()
-        # printr(
-        #     generation_model.w2.weight, "generation_model.w2.weight (during first)"
-        # )
-        # torch.distributed.barrier()
+        printr(generation_model.ff_1.layers[0].w1.weight)
         generation_model(torch.randn(8, 6))
         print_tensor_distribution(
-            generation_model.w2.weight, "generation_model.w2.weight", rank
+            generation_model.ff_1.layers[0].w1.weight, "generation_model.ff_1.layers[0].w1.weight", rank
         )
         torch.distributed.barrier()
 

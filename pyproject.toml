@@ -3,22 +3,27 @@ name = "torch_redistribute"
 version = "0.1.0"
 
 dependencies = [
+    "torch",
     "tabulate",
     "torchtune", 
     "torchao",
-    "torch"
 ]
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+prerelease = "allow"
 
 [tool.uv.sources]
 torch = { index = "pytorch" }
+torchtune = { index = "torchtune" }
 
 [[tool.uv.index]]
 name = "pytorch"
 url = "https://download.pytorch.org/whl/nightly/cu124"
-explicit = true
-
 
 [[tool.uv.index]]
 name = "torchtune"
 url = "https://download.pytorch.org/whl/nightly/"
-explicit = true

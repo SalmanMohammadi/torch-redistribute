@@ -1,14 +1,17 @@
-import torch.nn as nn
 from torch.distributed.tensor.debug import CommDebugMode, visualize_sharding
-from torch.distributed.tensor.parallel import parallelize_module
+from torch.distributed.tensor.parallel import (
+    ColwiseParallel,
+    PrepareModuleInput,
+    RowwiseParallel,
+    SequenceParallel,
+)
+from torch.distributed.tensor.placement_types import Replicate, Shard
 
 from torch_redistribute.style import (
     RedistributeColWiseParallel,
     RedistributeRowWiseParallel,
 )
-from torchtune import training
-from torch.distributed.tensor.parallel import ColwiseParallel, RowwiseParallel
-from torch.distributed.tensor.placement_types import Replicate
+
 
 # credit to @msaroufim for this funcition
 def print_tensor_distribution(param, name: str, rank: int):
@@ -38,53 +41,74 @@ def print_tensor_distribution(param, name: str, rank: int):
                 print(f"Rank {rank} handles indices {start_idx} to {end_idx-1}")
 
 
-redistribute_parallelize_plan = {
+dummy_redistribute_plan = {
     "w1": RedistributeColWiseParallel(),
     "w2": RedistributeRowWiseParallel(),
     "w3": RedistributeColWiseParallel(),
 }
 
 
-def redistribute(layer: nn.Module, device_mesh):
-    parallelize_module(layer, device_mesh, redistribute_parallelize_plan)
+dummy_tp_plan = {
+    "w1": ColwiseParallel(),
+    "w2": RowwiseParallel(),
+    "w3": ColwiseParallel(),
+}
 
-def distribute(layer: nn.Module, device_mesh):
-    parallelize_module(layer, device_mesh, {
-        "w1": ColwiseParallel(),
-        "w2": RowwiseParallel(),
-        "w3": ColwiseParallel(),
-    })
 
-def distribute_llama(model: nn.Module, device_mesh):
-    model = training.prepare_mha_for_tp(model, device_mesh)
-    llama_tp_plan = {
-        "tok_embeddings": RowwiseParallel(input_layouts=Replicate()),
-        "output": ColwiseParallel(output_layouts=Replicate()),
-        "layers.*.attn.q_proj": ColwiseParallel(),
-        "layers.*.attn.k_proj": ColwiseParallel(),
-        "layers.*.attn.v_proj": ColwiseParallel(),
-        "layers.*.attn.output_proj": RowwiseParallel(),
-        "layers.*.mlp.w1": ColwiseParallel(),
-        "layers.*.mlp.w2": RowwiseParallel(),
-        "layers.*.mlp.w3": ColwiseParallel(),
-    }
-    parallelize_module(model, device_mesh, llama_tp_plan)
-    return model
+llama_tt_tp_plan = {
+    "tok_embeddings": RowwiseParallel(
+        input_layouts=Replicate(), output_layouts=Shard(1)
+    ),
+    "output": ColwiseParallel(
+        input_layouts=Shard(1), output_layouts=Shard(-1), use_local_output=True
+    ),
+    "norm": SequenceParallel(),
+    "layers.*.attn": PrepareModuleInput(
+        input_layouts=(Shard(1), None),
+        desired_input_layouts=(Replicate(), None),
+    ),
+    "layers.*.attn.sa_norm": SequenceParallel(),
+    "layers.*.attn.q_proj": ColwiseParallel(),
+    "layers.*.attn.k_proj": ColwiseParallel(),
+    "layers.*.attn.v_proj": ColwiseParallel(),
+    "layers.*.attn.output_proj": RowwiseParallel(output_layouts=Shard(1)),
+    "layers.*.mlp_norm": SequenceParallel(),
+    "layers.*.mlp": PrepareModuleInput(
+        input_layouts=(Shard(1), None),
+        desired_input_layouts=(Replicate(), None),
+    ),
+    "layers.*.mlp.w1": ColwiseParallel(),
+    "layers.*.mlp.w2": RowwiseParallel(),
+    "layers.*.mlp.w3": ColwiseParallel(),
+}
 
-def redistribute_llama(model: nn.Module, device_mesh):
-    llama_redistribute_plan = {
-        "tok_embeddings": RedistributeRowWiseParallel(input_layouts=Replicate()),
-        "output": RedistributeColWiseParallel(output_layouts=Replicate()),
-        "layers.*.attn.q_proj": RedistributeColWiseParallel(),
-        "layers.*.attn.k_proj": RedistributeColWiseParallel(),
-        "layers.*.attn.v_proj": RedistributeColWiseParallel(),
-        "layers.*.attn.output_proj": RedistributeRowWiseParallel(),
-        "layers.*.mlp.w1": RedistributeColWiseParallel(),
-        "layers.*.mlp.w2": RedistributeRowWiseParallel(),
-        "layers.*.mlp.w3": RedistributeColWiseParallel(),
-    }
-    parallelize_module(model, device_mesh, llama_redistribute_plan)
-    return model
+llama_tp_plan = {
+    "tok_embeddings": RowwiseParallel(
+        input_layouts=Replicate(),
+    ),
+    "output": ColwiseParallel(output_layouts=Replicate()),
+    "layers.*.attn.q_proj": ColwiseParallel(),
+    "layers.*.attn.k_proj": ColwiseParallel(),
+    "layers.*.attn.v_proj": ColwiseParallel(),
+    "layers.*.attn.output_proj": RowwiseParallel(),
+    "layers.*.mlp.w1": ColwiseParallel(),
+    "layers.*.mlp.w2": RowwiseParallel(),
+    "layers.*.mlp.w3": ColwiseParallel(),
+}
+
+
+llama_redistribute_plan = {
+    "tok_embeddings": RedistributeRowWiseParallel(input_layouts=Replicate()),
+    "output": RedistributeColWiseParallel(output_layouts=Replicate()),
+    "layers.*.attn.q_proj": RedistributeColWiseParallel(),
+    "layers.*.attn.k_proj": RedistributeColWiseParallel(),
+    "layers.*.attn.v_proj": RedistributeColWiseParallel(),
+    "layers.*.attn.output_proj": RedistributeRowWiseParallel(),
+    "layers.*.mlp.w1": RedistributeColWiseParallel(),
+    "layers.*.mlp.w2": RedistributeRowWiseParallel(),
+    "layers.*.mlp.w3": RedistributeColWiseParallel(),
+}
+
 
 def printr(*args):
     import torch.distributed as dist

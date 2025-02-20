@@ -1,36 +1,34 @@
+import inspect
+import warnings
+from collections.abc import Sequence
 from contextlib import contextmanager
 from copy import deepcopy
-from typing import Callable, Any, Optional
+from typing import Any, Callable, cast, Optional
 
 import torch
-import torch.nn as nn
-from torch.distributed.fsdp._fully_shard._fsdp_param import free_storage
-from torch.distributed.tensor import DTensor
-from torch.distributed.device_mesh import DeviceMesh, _mesh_resources
-
-from torch_redistribute.utils import printr, redistribute, distribute
 import torch.distributed.tensor._dispatch as op_dispatch
 import torch.distributed.tensor._random as random
 import torch.nn as nn
 from torch.distributed.device_mesh import _mesh_resources, DeviceMesh
+from torch.distributed.fsdp._fully_shard._fsdp_param import free_storage
+from torch.distributed.tensor import DTensor
+from torch.distributed.tensor._api import distribute_tensor
 from torch.distributed.tensor._collective_utils import check_tensor_meta, mesh_broadcast
 from torch.distributed.tensor._dtensor_spec import DTensorSpec, TensorMeta
 from torch.distributed.tensor._random import (
     is_rng_supported_mesh,
     OffsetBasedRNGTracker,
 )
+from torch.distributed.tensor.parallel import parallelize_module
 from torch.distributed.tensor.placement_types import (
     Partial,
     Placement,
     Replicate,
     Shard,
 )
-from torch.distributed.tensor._api import distribute_tensor
-import inspect
-import warnings
-from collections.abc import Sequence
-from typing import Any, Callable, cast, Optional
 from typing_extensions import deprecated
+
+from torch_redistribute.utils import printr
 
 
 class RedistributeContext:
@@ -39,30 +37,30 @@ class RedistributeContext:
         model: nn.Module,
         tp_model: nn.Module,
         device_mesh: torch.distributed.device_mesh.DeviceMesh,
+        redistribute_parallelize_plan: dict,
     ):
-        self.model = model # this module should contain pre-post forward/backward hooks for FSDP
+        self.model = model
         self.tp_model = tp_model
         self.device_mesh = device_mesh
         self.fsdp_placements = {}
-
+        self.redistribute_parallelize_plan = redistribute_parallelize_plan
         for m_name, module in model.named_modules():
             if not m_name:  # Skip the root module
                 continue
             module_spec = {
-                name: param.placements for name, param in module.named_parameters()
+                name: param.placements
+                for name, param in module.named_parameters(recurse=False)
             }
             self.fsdp_placements[m_name] = module_spec
-        
+
     def _restore_fsdp_state(self):
-        for (m_name, module), (_, generate_module) in zip(
-            self.model.named_modules(), self.tp_model.named_modules()
-        ):
-            if not m_name:
+        for m_name, module in self.model.named_modules():
+            if not m_name:  # Skip the root module (optional, based on original intent)
                 continue
-            for (name, param), (_, generate_param) in zip(
-                module.named_parameters(), generate_module.named_parameters()
-            ):
+
+            for name, param in module.named_parameters(recurse=False):
                 target_placement = self.fsdp_placements[m_name][name]
+
                 if param.placements != target_placement:
                     redistributed_param = param.redistribute(
                         device_mesh=self.device_mesh,
@@ -70,11 +68,10 @@ class RedistributeContext:
                     )
                     module.register_parameter(
                         name,
-                        nn.Parameter(redistributed_param),
+                        nn.Parameter(redistributed_param, requires_grad=True),
                     )
-                    # free_storage(generate_param)
-                    # free_storage(param)
-    
+                    free_storage(param.to_local())
+
     def _register_parameters(self, module: nn.Module, tp_module: nn.Module):
         for (module_name, module_a), (_, module_b) in zip(
             module.named_modules(), tp_module.named_modules()
@@ -88,20 +85,26 @@ class RedistributeContext:
                         module_b.register_parameter(param_name, param)
 
     def _to_tensor_parallel(self):
-        # now we want to redistribute the underlying tensors, but we don't want to 
+        # now we want to redistribute the underlying tensors, but we don't want to
         # override the FSDP forward
-        redistribute(self.model, self.device_mesh)
-        # self._register_parameters(self.model, self.tp_model)
-        for (module_name, module_a), (_, module_b) in zip(
-            reversed(list(self.model.named_modules())), reversed(list(self.tp_model.named_modules()))
-        ):
-            if module_name:
-                printr("module name", module_name)
-                for param_name, param in reversed(list(module_a.named_parameters())):
-                    printr("param name", param_name)
-                    if "." in param_name:
-                        continue
-                    module_b.register_parameter(param_name, param)
+        # hack - let's Replicate the whole module, then apply our plan
+
+        parallelize_module(
+            self.model, self.device_mesh, self.redistribute_parallelize_plan
+        )
+        # at this point we also want to *replicate* modules which
+        share_parameters_iterative(self.model, self.tp_model)
+        # for (module_name, module_a), (_, module_b) in zip(
+        #     reversed(list(self.model.named_modules())),
+        #     reversed(list(self.tp_model.named_modules())),
+        # ):
+        #     if module_name:
+        #         printr("module name", module_name)
+        #         for param_name, param in reversed(list(module_a.named_parameters())):
+        #             printr("param name", param_name)
+        #             if "." in param_name:
+        #                 continue
+        #             module_b.register_parameter(param_name, param)
 
     def __enter__(self):
         # torch.distributed.barrier()
@@ -113,6 +116,21 @@ class RedistributeContext:
         self._restore_fsdp_state()
 
 
+def share_parameters_iterative(src: nn.Module, dest: nn.Module):
+    """
+    Shares parameters from src to dest iteratively (without recursion).
+    Assumes src and dest have identical structures.
+    """
+    dest_modules = dict(dest.named_modules())
+
+    for src_name, src_module in src.named_modules():
+        dest_module = dest_modules[src_name]
+
+        for param_name, param in src_module.named_parameters(recurse=False):
+            if isinstance(dest_module._parameters[param_name], DTensor):
+                dest_module.register_parameter(param_name, param)
+            else:
+                dest_module.to_empty(device=param.device)
 
 
 def redistribute_module_weights_only(

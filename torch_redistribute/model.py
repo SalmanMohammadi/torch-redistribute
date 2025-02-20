@@ -17,15 +17,14 @@ class FeedForward(nn.Module):
     def __init__(
         self,
         *,
-        dim,
-        hidden_dim,
+        dim,            
         bias: bool = False,
         activation: nn.Module = nn.SiLU(),
     ):
         super().__init__()
-        self.w1 = nn.Linear(dim, hidden_dim, bias=bias)
-        self.w3 = nn.Linear(dim, hidden_dim, bias=bias)
-        self.w2 = nn.Linear(hidden_dim, hidden_dim, bias=bias)
+        self.w1 = nn.Linear(dim, dim, bias=bias)
+        self.w3 = nn.Linear(dim, dim, bias=bias)
+        self.w2 = nn.Linear(dim, dim, bias=bias)
         self.activation = activation
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -48,7 +47,6 @@ class DeepFeedForward(nn.Module):
     def __init__(
         self,
         dim,
-        hidden_dim,
         depth: int,
         bias: bool = False,
         activation: nn.Module = nn.SiLU(),
@@ -57,24 +55,25 @@ class DeepFeedForward(nn.Module):
         self.layers = nn.ModuleList(
             [
                 FeedForward(
-                    dim=dim, hidden_dim=hidden_dim, bias=bias, activation=activation
+                    dim=dim, bias=bias, activation=activation
                 )
                 for _ in range(depth)
             ]
         )
+        self.w4 = nn.Linear(dim, dim, bias=bias)
         self.activation = activation
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         for layer in self.layers:
             x = layer(x)
-
+        x = self.w4(x)
         return x
 
 class DummyModel(nn.Module):
-    def __init__(self):
+    def __init__(self, dim: int,  depth: int):
         super().__init__()
-        self.ff_1 = DeepFeedForward(dim=1024, hidden_dim=4096, depth=8)
-        self.ff_2 = DeepFeedForward(dim=1024, hidden_dim=4096, depth=8)
+        self.ff_1 = DeepFeedForward(dim=dim, depth=depth)
+        self.ff_2 = DeepFeedForward(dim=dim, depth=depth)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.ff_1(x)
